@@ -3,3 +3,5 @@
 *.jpg
 *.ipynb
 *.pyc
+third_party/
+__pycache__/
