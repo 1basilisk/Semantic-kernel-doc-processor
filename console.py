@@ -23,6 +23,9 @@ from semantic_kernel.connectors.ai.open_ai.prompt_execution_settings.azure_chat_
 )
 from NanoVisionPlugin import NanoVisionPlugin
 from VisionPlugin import VisionPlugin
+from PdfToImgPlugin import PdfToImgPlugin
+
+
 
 async def main():
     # Initialize the kernel
@@ -35,6 +38,17 @@ async def main():
         base_url=os.getenv("AZURE_OPENAI_ENDPOINT"),
     )
     kernel.add_service(chat_completion)
+
+
+    # chat_completion = AzureChatCompletion(
+    #     deployment_name="grok-3",
+    #     api_key=os.getenv("AZURE_OPENAI_API_KEY_GROK"),
+    #     base_url=os.getenv("AZURE_OPENAI_ENDPOINT_GROK"),
+    # )
+    # kernel.add_service(chat_completion)
+
+
+
 
     # Set the logging level for  semantic_kernel.kernel to DEBUG.
     setup_logging()
@@ -77,6 +91,11 @@ async def main():
     kernel.add_plugin(
         VisionPlugin(),
         plugin_name="Vision",
+    )
+
+    kernel.add_plugin(
+        PdfToImgPlugin(),
+        plugin_name="PdfToImage",
     )
 
     # Enable planning
